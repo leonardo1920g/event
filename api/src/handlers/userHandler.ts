@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
-import { createUser } from "../controllers/userControllers";
+import { createUser, getAllUsers } from "../controllers/userControllers";
 
 
-const getUsersHandler = (req:Request, res:Response) => {
-    res.send("se puede llamara a todos los usuarios")
+const getUsersHandler = async (req:Request, res:Response) => {
+
+    try {
+        const users = await getAllUsers();
+        res.status(200).json(users);
+    } catch (error:any) {
+        res.status(400).json({ error: error.message })
+    }
 };
 
 const getUserIdHandler = (req:Request, res:Response) => {

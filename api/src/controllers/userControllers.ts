@@ -1,3 +1,4 @@
+import { QueryResult } from 'pg';
 import { db } from '../db';
 import { User } from '../models/userModels';
 
@@ -14,4 +15,20 @@ const createUser = async (name: string, email: string, phone: string): Promise<U
     
 };
 
-export { createUser };
+const getAllUsers = async () => {
+
+    const client = await db.connect();
+    
+    const result: QueryResult = await client.query('SELECT * FROM users');
+    const users = result.rows;
+    client.release();
+    
+    
+    return users;
+};
+
+const getUserId = () => {
+
+}
+
+export { createUser, getAllUsers, getUserId };
