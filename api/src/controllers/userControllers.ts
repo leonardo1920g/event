@@ -2,7 +2,7 @@ import { QueryResult } from 'pg';
 import { db } from '../db';
 import { User } from '../models/userModels';
 
-const createUser = async (name: string, email: string, phone: string): Promise<User> => {
+const createUser = async (name: string, email: string, phone: string) => {
 
     const client = await db.connect();
        

@@ -1,10 +1,9 @@
 interface Event {
     id: number;
-    name: string;
-    conten: string;
+    title: string;
     city: string;
     date: string;
-    content:string;
+    content: string;
 }
 
 export { Event };
