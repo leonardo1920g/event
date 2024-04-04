@@ -8,7 +8,8 @@ const getUsersHandler = async (req:Request, res:Response) => {
         const users = await getAllUsers();
         res.status(200).json(users);
     } catch (error:any) {
-        res.status(400).json({ error: error.message })
+        console.error('Error al obtener eventos:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
     }
 };
 
@@ -20,6 +21,7 @@ const getUserIdHandler = async (req:Request, res:Response) => {
         
         const user = await getUserId(parseInt(id))
         res.status(200).json(user);
+        
     } catch (error:any) {
         res.status(500).json({ error: error.message });
         

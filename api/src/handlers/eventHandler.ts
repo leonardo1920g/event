@@ -1,12 +1,31 @@
 import { Request, Response } from "express";
-import { createEvent } from "../controllers/eventControllers";
+import { createEvent, getAllEvents, getEventId } from "../controllers/eventControllers";
 
-const getAllEventsHandler = (req:Request, res:Response) => {
-    res.send("puedo traer varios eventos")
+const getAllEventsHandler = async (req: Request, res: Response) => {
+
+    try {
+        const events = await getAllEvents();
+        res.status(200).json(events);
+
+    } catch (error: any) {
+        console.error('Error al obtener eventos:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 };
 
-const getEventIdHandler = (req:Request, res:Response) => {
-    res.send("puedo traer un evento por id")
+const getEventIdHandler = async (req:Request, res:Response) => {
+    
+    const { id } = req.params;
+
+    try {
+        
+        const event = await getEventId(parseInt(id));
+        res.status(200).json(event);
+
+    } catch ( error:any ) {
+        console.error('Error al obtener eventos:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 };
 
 const createEventHandler = async (req:Request, res:Response) => {
