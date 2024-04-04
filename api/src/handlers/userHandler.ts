@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser, getAllUsers } from "../controllers/userControllers";
+import { createUser, getAllUsers, getUserId } from "../controllers/userControllers";
 
 
 const getUsersHandler = async (req:Request, res:Response) => {
@@ -12,11 +12,23 @@ const getUsersHandler = async (req:Request, res:Response) => {
     }
 };
 
-const getUserIdHandler = (req:Request, res:Response) => {
-    res.send("se puede llamar a un usuario por id")
+const getUserIdHandler = async (req:Request, res:Response) => {
+
+    const {id} = req.params;
+
+    try {
+        
+        const user = await getUserId(parseInt(id))
+        res.status(200).json(user);
+    } catch (error:any) {
+        res.status(500).json({ error: error.message });
+        
+    };
+
 };
 
 const createUserHandler = async (req: Request, res: Response) => {
+
     const { name, email, phone } = req.body;
 
     try {

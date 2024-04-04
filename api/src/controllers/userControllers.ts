@@ -18,7 +18,7 @@ const createUser = async (name: string, email: string, phone: string): Promise<U
 const getAllUsers = async () => {
 
     const client = await db.connect();
-    
+
     const result: QueryResult = await client.query('SELECT * FROM users');
     const users = result.rows;
     client.release();
@@ -27,7 +27,14 @@ const getAllUsers = async () => {
     return users;
 };
 
-const getUserId = () => {
+const getUserId = async (id:number) => {
+
+    const client = await db.connect();
+
+    const result: QueryResult = await client.query(`SELECT * FROM users WHERE id = $1`, [id]);
+    const user = result.rows[0];
+
+    return user;
 
 }
 
