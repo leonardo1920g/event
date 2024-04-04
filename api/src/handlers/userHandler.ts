@@ -21,4 +21,5 @@ const createUserHandler = async (req: Request, res: Response) => {
     }
 };
 
+
 export { getUsersHandler, getUserIdHandler, createUserHandler}
