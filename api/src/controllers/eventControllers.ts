@@ -4,10 +4,12 @@ import { Event } from "../models/eventModel";
 
 const createEvent = async (title:string, city:string, date:string, content:string ) => {
 
+    const active:string = "false";
+
     const client = await db.connect();
     const result = await client.query(
-        "INSERT INTO events (title, city, date, content) VALUES ($1, $2, $3, $4) RETURNING *",
-        [title, city, date, content]
+        "INSERT INTO events (title, city, date, content, active) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+        [title, city, date, content, active]
     );
 
     return result.rows[0] as Event;

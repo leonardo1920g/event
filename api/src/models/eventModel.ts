@@ -4,6 +4,7 @@ interface Event {
     city: string;
     date: string;
     content: string;
+    active: string;
 }
 
 export { Event };
