@@ -32,12 +32,20 @@ const getUserId = async (id:number) => {
     const client = await db.connect();
 
     const queryText = `
-            SELECT users.*, events.title AS events
-            FROM users
-            LEFT JOIN event_users ON users.id = event_users.user_id
-            LEFT JOIN events ON event_users.event_id = events.id
-            WHERE users.id = $1
-        `;
+        SELECT 
+            users.*, 
+            ARRAY_AGG(events.title) AS events
+        FROM 
+            users
+        LEFT JOIN 
+            event_users ON users.id = event_users.user_id
+        LEFT JOIN 
+            events ON event_users.event_id = events.id
+        WHERE 
+            users.id = $1
+        GROUP BY 
+            users.id, users.name, users.email; -- Asegúrate de agregar aquí todas las columnas de la tabla 'users' que deseas seleccionar
+    `;
 
     const result: QueryResult = await client.query(queryText, [id]);
     const user = result.rows[0];
