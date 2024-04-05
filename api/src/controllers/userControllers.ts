@@ -31,11 +31,40 @@ const getUserId = async (id:number) => {
 
     const client = await db.connect();
 
-    const result: QueryResult = await client.query(`SELECT * FROM users WHERE id = $1`, [id]);
+    const queryText = `
+            SELECT users.*, events.title AS events
+            FROM users
+            LEFT JOIN event_users ON users.id = event_users.user_id
+            LEFT JOIN events ON event_users.event_id = events.id
+            WHERE users.id = $1
+        `;
+
+    const result: QueryResult = await client.query(queryText, [id]);
     const user = result.rows[0];
 
     return user;
 
-}
+};
 
-export { createUser, getAllUsers, getUserId };
+const updateEventActiveStatus = async (eventId:string) => {
+
+    const client = await db.connect();
+    
+    const queryText = 'UPDATE events SET active = true WHERE id = $1';
+        await client.query(queryText, [eventId]);
+    
+        client.release();
+    
+};
+
+const associateEventToUser = async (userId:string, eventId:string) => {
+    const client = await db.connect();
+    
+        const queryText = 'INSERT INTO event_users(user_id, event_id) VALUES ($1, $2)';
+        await client.query(queryText, [userId, eventId]);
+    
+        client.release();
+    
+};
+
+export { createUser, getAllUsers, getUserId, updateEventActiveStatus, associateEventToUser };
