@@ -7,7 +7,9 @@ const NavBar = () => {
         <>
             <div className="bg-sky-900 text-white flex justify-between py-5 px-20">
 
-                <h1 className="font-bold text-xl">Events VIP</h1>
+                <h1 className="font-bold text-xl">
+                    <Link href={'/'}>Events VIP</Link>
+                </h1>
 
                 <ul className="flex justify-center gap-10 font-bold ">
                     <li>
