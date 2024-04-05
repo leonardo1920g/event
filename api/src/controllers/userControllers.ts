@@ -44,7 +44,7 @@ const getUserId = async (id:number) => {
         WHERE 
             users.id = $1
         GROUP BY 
-            users.id, users.name, users.email; -- Asegúrate de agregar aquí todas las columnas de la tabla 'users' que deseas seleccionar
+            users.id, users.name, users.email; 
     `;
 
     const result: QueryResult = await client.query(queryText, [id]);
