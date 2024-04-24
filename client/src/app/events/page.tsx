@@ -62,6 +62,7 @@ const events = () => {
                 <div className="py-10 grid grid-cols-4 gap-10">
                     {eventos.map(event=>{
                         return<EventCard
+                            key={event.id}
                             title={event.title}
                             content={event.content}
                             city={event.city}
