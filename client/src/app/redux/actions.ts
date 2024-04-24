@@ -5,3 +5,9 @@ export const fetchUsers = createAsyncThunk( 'users/fetchUsers', async () => {
     const data = await res.json();
     return data;
 });
+
+export const fetchEvents = createAsyncThunk( 'events/fetchEvents', async () => {
+    const res = await fetch('http://localhost:3003/events');
+    const data = await res.json();
+    return data;
+})
