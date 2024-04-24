@@ -44,9 +44,9 @@ const users = () => {
     return (
         <div className="container relative m-auto">
             <div className="p-10">
-                <p className="font-bold text-4xl">
+                <h1 className="font-bold text-4xl">
                     Users
-                </p>
+                </h1>
 
                 <div className="py-10 grid grid-cols-4 gap-10">
                     {usuarios.map(user=>{

@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/redux/stores.js", "src/app/redux/actions.ts", "src/app/redux/reducer.ts", "src/app/redux/store.ts"],
   "exclude": ["node_modules"]
 }
